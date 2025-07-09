@@ -1,0 +1,12 @@
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 13123
+"GET / HTTP/1.1" 200 13123
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 13123
+"POST /generate/ HTTP/1.1" 200 13737
+Watching for file changes with StatReloader
+"POST /generate/ HTTP/1.1" 200 45712
+"POST /generate/ HTTP/1.1" 200 45628
+"POST /generate/ HTTP/1.1" 200 48515
+"GET /history/ HTTP/1.1" 200 9916
+"GET / HTTP/1.1" 200 13123

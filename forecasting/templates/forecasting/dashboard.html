@@ -1,0 +1,120 @@
+{% extends 'forecasting/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Dashboard - Flight Demand Forecasting{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1><i class="fas fa-chart-line"></i> Flight Demand Forecasting</h1>
+        <p>Advanced AI-powered forecasting for Emirates Flight Catering operations</p>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mb-5">
+        <div class="col-md-3">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h4>Prophet Model</h4>
+                <p>Facebook's robust forecasting tool for time series with strong seasonal patterns</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-area"></i>
+                </div>
+                <h4>ARIMA</h4>
+                <p>Classical statistical model for analyzing and forecasting time series data</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h4>LSTM Neural Network</h4>
+                <p>Deep learning model capable of learning long-term dependencies</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h4>Ensemble Model</h4>
+                <p>Combines all models for maximum accuracy and robustness</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forecast Parameters Form -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fas fa-cog"></i> Forecast Parameters</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'forecasting:generate_forecast' %}" id="forecastForm">
+                        {% csrf_token %}
+                        {% crispy form %}
+                        
+                        <div class="loading-spinner" id="loadingSpinner">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Generating forecast... This may take a few moments.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Statistics -->
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number">75+</div>
+                <div>Years of Data</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                <div class="stats-number">4</div>
+                <div>ML Models</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                <div class="stats-number">95%</div>
+                <div>Accuracy</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                <div class="stats-number">60</div>
+                <div>Max Forecast Months</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('forecastForm').addEventListener('submit', function(e) {
+    // Show loading spinner
+    document.getElementById('loadingSpinner').style.display = 'block';
+    
+    // Disable submit button
+    const submitBtn = document.querySelector('input[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.value = 'Generating...';
+});
+</script>
+{% endblock %}
